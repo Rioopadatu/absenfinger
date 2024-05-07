@@ -85,17 +85,17 @@ class FpIzinDataTable extends DataTable
                 'data' => 'status',
                 'name' => 'status',
                 'title' => 'Status',
-                // 'render' => 'function(data, type, full, meta) {
-                //     if (data == null) {
-                //         return "<p>Menunggu</p>";
-                //     } else if (data == 1) {
-                //         return "<p>Di Terima</p>";
-                //     } else if (data == 2) {
-                //         return "<p>Di Tolak</p>";
-                //     } else {
-                //         return "<p>Tidak Di Temukan</p>";
-                //     }
-                // }'
+                'render' => 'function(data, type, full, meta) {
+                    if (data == null) {
+                        return "<p>Menunggu</p>";
+                    } else if (data == 1) {
+                        return "<p>Di Terima</p>";
+                    } else if (data == 2) {
+                        return "<p>Di Tolak</p>";
+                    } else {
+                        return "<p>Tidak Di Temukan</p>";
+                    }
+                }'
             ],
             ['data' => 'action', 'name' => 'action', 'title' => 'Action', 'orderable' => false, 'searchable' => false, 'printable' => false],
         ];
