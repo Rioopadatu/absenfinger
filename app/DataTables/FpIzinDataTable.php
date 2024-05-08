@@ -20,7 +20,18 @@ class FpIzinDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'fp_izin.datatables_actions');
+        return $dataTable->addColumn('action', 'fp_izin.datatables_actions')
+            ->addColumn('status', function ($data) {
+                if ($data->status == null) {
+                    return "Menunggu";
+                } else if ($data->status == 1) {
+                    return "Di Terima";
+                } else if ($data->status == 2) {
+                    return "Di Tolak";
+                } else {
+                    return "Tidak Di Temukan";
+                }
+            });
     }
 
     /**
@@ -73,33 +84,18 @@ class FpIzinDataTable extends DataTable
      *
      * @return array
      */
-    protected function getColumns()
-    {
-        return [
-            //'uid',
-            'uid',
-            ['data' => 'fp_user.name',     'name' => 'fp_user.name',     'title' => 'Nama'],
-            ['data' => 'tanggal_berakhir',     'name' => 'tanggal_berakhir',     'title' => 'Mulai',"searchable"=> false],
-            ['data' => 'tanggal_berakhir',     'name' => 'tanggal_berakhir',     'title' => 'Berakhir'],
-            [
-                'data' => 'status',
-                'name' => 'status',
-                'title' => 'Status',
-                'render' => 'function(data, type, full, meta) {
-                    if (data == null) {
-                        return "<p>Menunggu</p>";
-                    } else if (data == 1) {
-                        return "<p>Di Terima</p>";
-                    } else if (data == 2) {
-                        return "<p>Di Tolak</p>";
-                    } else {
-                        return "<p>Tidak Di Temukan</p>";
-                    }
-                }'
-            ],
-            ['data' => 'action', 'name' => 'action', 'title' => 'Action', 'orderable' => false, 'searchable' => false, 'printable' => false],
-        ];
-    }
+        protected function getColumns()
+        {
+            return [
+                //'uid',
+                'uid',
+                ['data' => 'fp_user.name',     'name' => 'fp_user.name',     'title' => 'Nama'],
+                ['data' => 'tanggal_berakhir',     'name' => 'tanggal_berakhir',     'title' => 'Mulai',"searchable"=> false],
+                ['data' => 'tanggal_berakhir',     'name' => 'tanggal_berakhir',     'title' => 'Berakhir'],
+                ['data' => 'status', 'name' => 'status', 'title' => 'status',],
+                ['data' => 'action', 'name' => 'ac/PL21/Stion', 'title' => 'Action', 'orderable' => false, 'searchable' => false, 'printable' => false],
+            ];
+        }
 
     /**
      * Get filename for export.
