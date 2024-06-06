@@ -68,7 +68,6 @@ class FpIzinController extends Controller
     {
         $fpIzin = $this->fpIzinRepository->update($request->all(),$uid);
 
-
         Flash::message('Izin Update successfully');
         return redirect(route('fpIzins.index'));
     }
